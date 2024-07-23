@@ -16,7 +16,7 @@ const upload = multer({ dest: "uploads" });
 
 // MongoDB Connection
 mongoose
-  .connect("mongodb://127.0.0.1/FileSharing-Site")
+  .connect("mongodb+srv://ssoumyajit245:nGa0slmcM3M3pQv0@cluster0.6by1prp.mongodb.net/File_Sharing_Site?retryWrites=true&w=majority&appName=Cluster0")
   .then(() => console.log("MongoDB Connected"));
 
 // View Engine
