@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>File Sharing Site</title>
+
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #71b7e6, #9b59b6);
+        color: #333;
+      }
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+      #form {
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        max-width: 500px;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      #form h1 {
+        margin-bottom: 1rem;
+        font-size: 1.5rem;
+        color: #333;
+      }
+      #form label {
+        font-weight: bold;
+        margin-top: 1rem;
+      }
+      #form input[type="file"],
+      #form input[type="password"] {
+        width: 100%;
+        padding: 0.5rem;
+        margin-top: 0.5rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      #btn {
+        grid-column: span 2;
+        margin-top: 1rem;
+        padding: 0.75rem;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      #btn:hover {
+        background-color: #45a049;
+      }
+      .main-div {
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        max-width: 500px;
+        width: 100%;
+        box-sizing: border-box;
+        margin-bottom: 7px;
+      }
+      #div {
+        margin: 1rem 0;
+        text-align: center;
+      }
+      a {
+        color: rgb(0, 0, 255);
+        text-decoration: none;
+      }
+      a:hover {
+        color: green;
+      }
+      .copy-icon {
+        cursor: pointer;
+        margin-left: 10px;
+        vertical-align: middle;
+      }
+      .tooltip {
+        position: relative;
+        display: inline-block;
+      }
+      .tooltip .tooltiptext {
+        visibility: hidden;
+        width: 60px;
+        background-color: black;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px;
+        position: absolute;
+        z-index: 1;
+        bottom: 125%; /* Position above the icon */
+        left: 50%;
+        margin-left: -30px;
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+      .tooltip:hover .tooltiptext {
+        visibility: visible;
+        opacity: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <% if (locals.fileLink != null) { %>
+      <div class="main-div">
+        <div id="div">
+          <b>Your file is uploaded:</b>
+          <a id="fileLink" href="<%= locals.fileLink %>"><%= locals.fileLink %></a>
+          <div class="tooltip">
+            <img src="https://img.icons8.com/ios-filled/24/000000/copy.png" alt="Copy" class="copy-icon" onclick="copyLink(this)" />
+            <span class="tooltiptext">Copy</span>
+          </div>
+        </div>
+      </div>
+      <% } %>
+      <form id="form" action="/upload" method="post" enctype="multipart/form-data">
+        <h1>Welcome to Free Encrypted File Sharing Software</h1>
+        <label for="file">File:</label>
+        <input type="file" id="file" name="file" required />
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" />
+        <button id="btn" type="submit">Share</button>
+      </form>
+    </div>
+
+    <script>
+      function copyLink(icon) {
+        var link = document.getElementById("fileLink").href;
+        navigator.clipboard.writeText(link).then(
+          function () {
+            var tooltip = icon.nextElementSibling;
+            tooltip.innerHTML = "Copied";
+            setTimeout(function () {
+              tooltip.innerHTML = "Copy";
+            }, 2000);
+          },
+          function (err) {
+            console.error("Failed to copy link: ", err);
+          }
+        );
+      }
+    </script>
+  </body>
+</html>
+
+
+
+
+
